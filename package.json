@@ -1,0 +1,27 @@
+{
+  "name": "mssummit-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "webpack": "^4.41.1",
+    "webpack-cli": "^3.3.9",
+    "websy-navigator": "^1.1.45"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx webpack; node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/websy85/mssummit-api.git"
+  },
+  "author": "Nick Webster/Speros Kokenes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/websy85/mssummit-api/issues"
+  },
+  "homepage": "https://github.com/websy85/mssummit-api#readme"
+}
