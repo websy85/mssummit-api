@@ -1,5 +1,3 @@
-import config from './config'
-import schema from './qlikSchema'
 import { loadView, hideView } from './views'
 import { qix } from './classes/qix'
 import * as styles from '../less/main.less'
@@ -17,7 +15,7 @@ const selections = [
         values: ['Japan', 'Taiwan', 'USA', 'India', 'Malaysia']
     }
 ]
-qix.connect(selections).then(() => {
+qix.connect().then(() => {
     const options = {    
         defaultView: 'hub'
     }
@@ -27,9 +25,9 @@ qix.connect(selections).then(() => {
         loadView(view, params)        
     })
     window.navController.subscribe('hide', view => {
-        
+        hideView(view)
     })
-    window.navController.init()            
+    window.navController.init()  
 })
 
 function createApp () {

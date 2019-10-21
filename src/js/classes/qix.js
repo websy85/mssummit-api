@@ -7,7 +7,7 @@ class Qix {
         this.global
         this.app       
     }
-    connect (selections) {
+    connect () {
         return new Promise((resolve, reject) => {            
             const session = enigma.create({
                 url: `${config.qlikUrl}/${this.appId ? this.appId : 'engineData'}`,
@@ -17,18 +17,8 @@ class Qix {
                 this.global = global
                 if (this.appId) {
                     return global.openDoc(this.appId).then(app => {
-                        this.app = app
-                        if (selections) {
-                            const selectionPromises = selections.map(s => {
-                                return this.app.getField(s.field).then(f => f.selectValues(s.values.map(v => ({qText: v}))))
-                            })
-                            return Promise.all(selectionPromises).then(() => {
-                                resolve()
-                            })
-                        }
-                        else {
-                            resolve()
-                        }
+                        this.app = app                        
+                        resolve()                        
                     })
                 }
                 else {
