@@ -1,11 +1,45 @@
 const express = require('express')
 const app = express()
+const ws = require('ws')
+const enigma = require('enigma.js')
+const halyard = require('halyard.js')
+const enigmaMixin = require('halyard.js/dist/halyard-enigma-mixin.js')
+const schema = require('enigma.js/schemas/12.170.2.json')
+const bodyParser = require('body-parser')
+
+app.use(bodyParser.json({limit: '1mb'}))
+app.use(bodyParser.urlencoded({limit: '1mb'}))
 
 app.use('/', express.static(`${__dirname}/dist`))
 app.use('/resources', express.static(`${__dirname}/node_modules`))
 
 app.get('/', (req, res) => {
-	express.sendFile(`${__dirname}/dist/index.html`)
+	res.sendFile(`${__dirname}/dist/index.html`)
+})
+
+app.post('/createApp', (req, res) => {	
+	console.log(req.body)
+	
+	const session = enigma.create({
+		schema,
+		url: 'ws://localhost:19076/app/engineData',
+		mixins: enigmaMixin,
+		createSocket(url) {
+			return new ws(url);
+		}
+	})
+	session.open().then(global => {			
+		const hConfig = new halyard()
+        hConfig.addTable('/data/ramen-ratings.csv', 'Ratings') 
+		global.createAppUsingHalyard(req.body.name, hConfig).then(result => {			
+			res.send('ok')			
+		}, err => console.log(err))
+	})
+	
+})
+
+app.get('/*', (req, res) => {
+	res.sendFile(`${__dirname}/dist/index.html`)
 })
 
 app.listen(8000)

@@ -4,9 +4,147 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="/resources/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/resources/websy-navigator/websy-navigator.min.css">
 	<title>Document</title>
 </head>
 <body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/">MS API</a>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="session2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Creating a Web App With Qlik Core
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="session2">
+						<li class="trigger-item" data-view="hub">Hub</li>
+						<li class="trigger-item" data-view="gettablesandkeys">gettablesandkeys</li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="session3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Generic Objects
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="session3">										
+						<li class="trigger-item" data-view="expressions">Expressions</li>
+						<li class="trigger-item" data-view="listobjects">ListObjects</li>
+						<li class="trigger-item" data-view="hypercubes">HyperCubes</li>
+						<li class="trigger-item" data-view="selecting">Selecting</li>
+						<li class="trigger-item" data-view="currentselections">CurrentSelections</li>
+						<li class="trigger-item" data-view="multihypercubes">MultiHyperCubes</li>
+						<li class="trigger-item" data-view="cyclicgroup">CyclicGroup</li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="session4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Visualizing Data
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="session4">
+						<li class="trigger-item" data-view="d3">D3</li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="session5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Solution Architecture
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="session5">
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="session6" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Object Architecture
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="session6">
+					</ul>
+				</li>
+				<li class="nav-item trigger-item" data-view="sandbox">Sandbox</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container-fluid">
+		<section class="view" data-view="hub">
+			<div class="row">
+				<div class="col-4">
+					<div class="input-group mb-3">						
+						<input id="newAppName" type="text" class="form-control" placeholder="New App Name">
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary" onclick="createApp()">Create</button>
+						</div>						
+					</div>
+				</div>
+			</div>
+			<div class="row" id="docList"></div>
+		</section>
+		<section class="view" data-view="gettablesandkeys">
+			<h1>Get Table Data</h1>
+			<div id="gettablesandkeys"></div>
+		</section>
+		<section class="view" data-view="expressions">			
+			<h1>qValueExpression / qStringExpression</h1>
+			<div class="row">
+				<div class="col-4">
+					<ul id="expressions" class="list-group list-group-flush text-center"></ul>
+				</div>
+			</div>			
+		</section>
+		<section class="view" data-view="listobjects">
+			<h1>ListObjects</h1>
+			<div class="row">
+				<div class="col-4">
+					<div id="listobjects"></div>
+				</div>
+			</div>			
+		</section>
+		<section class="view" data-view="hypercubes">
+			<h1>HyperCubes</h1>
+			<div id="hypercubes"></div>
+		</section>
+		<section class="view" data-view="selecting">
+			<h1>Selecting Values</h1>
+			<div class="row">
+				<div class="col-4">
+					<div id="selecting_listobjects"></div>
+				</div>
+				<div class="col-8">
+					<div id="selecting_hypercubes"></div>
+				</div>
+			</div>						
+		</section>
+		<section class="view" data-view="currentselections">
+			<h1>Current Selections</h1>						
+			<div id="currentselections" class="row"></div>				
+			<br>
+			<div class="row">					
+				<div class="col-4">
+					<div id="currentselections_listobjects"></div>
+				</div>
+				<div class="col-8">
+					<div id="currentselections_hypercubes"></div>
+				</div>
+			</div>
+		</section>
+		<section class="view" data-view="multihypercubes">
+			<h1>Multi-HyperCubes</h1>
+			<div id="multihypercubes"></div>
+		</section>
+		<section class="view" data-view="cyclicgroup">
+			<h1>Cyclic Group / Patches</h1>
+			<div id="cyclicgroup"></div>
+		</section>
+		<section class="view" data-view="d3">
+			<h1>D3 & Qlik</h1>
+			<div id="d3" class='chart-object'></div>
+		</section>
+		<section class="view" data-view="sandbox">
+			<h1>Sandbox</h1>
+			<div id="sandbox"></div>
+		</section>
+	</div>
+	<script src="/resources/jquery/dist/jquery.min.js"></script>
+	<script src="/resources/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="/resources/websy-navigator/websy-navigator.min.js"></script>			
+	<script src="/resources/enigma.js/enigma.min.js"></script>
 	<script src="/main.js"></script>
 </body>
 </html>

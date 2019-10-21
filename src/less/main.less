@@ -1,0 +1,30 @@
+@white: #ffffff;
+@orange: #ffaa00;
+@light-gray: #cccccc;
+
+nav {
+    &.navbar-dark {
+        text-align: center;
+        margin-bottom: 20px;
+        .navbar-nav {
+            .nav-item, .nav-link {
+                color: @white;
+            }
+            .trigger-item {
+                padding: 10px 15px;            
+                cursor: pointer;
+            }
+        }
+    }    
+}
+
+.state-S {
+    background-color: @orange;
+}
+[class*="state-X"] {
+    background-color: @light-gray;
+}
+
+.chart-object {
+    height: 400px;
+}
