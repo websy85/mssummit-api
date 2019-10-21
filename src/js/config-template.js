@@ -1,4 +1,6 @@
-export const config = {
+const config = {
     qlikUrl: '',
     mainApp: ''
 }
+
+export default config

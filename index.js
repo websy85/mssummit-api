@@ -17,12 +17,10 @@ app.get('/', (req, res) => {
 	res.sendFile(`${__dirname}/dist/index.html`)
 })
 
-app.post('/createApp', (req, res) => {	
-	console.log(req.body)
-	
+app.get('/createApp/:name', (req, res) => {		
 	const session = enigma.create({
 		schema,
-		url: 'ws://localhost:19076/app/engineData',
+		url: `ws://localhost:19076/engineData`,
 		mixins: enigmaMixin,
 		createSocket(url) {
 			return new ws(url);
@@ -31,11 +29,10 @@ app.post('/createApp', (req, res) => {
 	session.open().then(global => {			
 		const hConfig = new halyard()
         hConfig.addTable('/data/ramen-ratings.csv', 'Ratings') 
-		global.createAppUsingHalyard(req.body.name, hConfig).then(result => {			
+		global.createAppUsingHalyard(req.params.name, hConfig).then(result => {			
 			res.send('ok')			
 		}, err => console.log(err))
-	})
-	
+	})	
 })
 
 app.get('/*', (req, res) => {

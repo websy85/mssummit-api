@@ -3,6 +3,7 @@ import schema from './qlikSchema'
 import { loadView, hideView } from './views'
 import { qix } from './classes/qix'
 import * as styles from '../less/main.less'
+import { request } from 'http'
 
 window.navController
 
@@ -30,6 +31,15 @@ qix.connect(selections).then(() => {
     })
     window.navController.init()            
 })
+
+function createApp () {
+    const name = document.getElementById('newAppName').value
+    getRequest(`/createapp/${name}`).then(response => {
+        loadView('hub')
+    })
+}
+
+window.createApp = createApp
 
 function getRequest (url) {
 	return new Promise((resolve, reject) => {
