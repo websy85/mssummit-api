@@ -2,6 +2,7 @@ class CyclicTable {
     constructor (options) {        
         this.model = options.model
         this.elementId = options.elementId
+        this.attached = true
         this.model.on('changed', this.render.bind(this))
         const el = document.getElementById(this.elementId)
         el.addEventListener('click', this.handleClick.bind(this))
@@ -23,6 +24,9 @@ class CyclicTable {
         }
     }
     render () {
+        if (this.attached === false) {
+            return
+        }
         this.model.getLayout().then(layout => {
             this.cyclePos = layout.qHyperCube.qDimensionInfo[0].qGroupPos
 		    this.cycleCount = layout.qHyperCube.qDimensionInfo[0].qGroupFieldDefs.length

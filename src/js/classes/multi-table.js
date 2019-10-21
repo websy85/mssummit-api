@@ -2,6 +2,7 @@ class MultiTable {
     constructor (options) {        
         this.model = options.model
         this.elementId = options.elementId
+        this.attached = true
         this.model.on('changed', this.render.bind(this))
         const el = document.getElementById(this.elementId)
         el.addEventListener('click', this.handleClick.bind(this))
@@ -16,6 +17,9 @@ class MultiTable {
         }
     }
     render () {
+        if (this.attached === false) {
+            return
+        }    
         this.model.getLayout().then(layout => {
             let html = '<div class="row">'
             layout.tables.forEach((t, tIndex) => {

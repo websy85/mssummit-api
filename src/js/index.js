@@ -27,7 +27,7 @@ qix.connect(selections).then(() => {
         loadView(view, params)        
     })
     window.navController.subscribe('hide', view => {
-        
+        hideView(view)
     })
     window.navController.init()            
 })

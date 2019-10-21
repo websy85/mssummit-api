@@ -3,6 +3,7 @@ class ListWithSelections {
         this.model = options.model
         this.elementId = options.elementId
         this.model.on('changed', this.render.bind(this))
+        this.attached = true
         const el = document.getElementById(this.elementId)
         el.addEventListener('click', this.handleClick.bind(this))
         this.render()
@@ -14,6 +15,9 @@ class ListWithSelections {
         }
     }
     render () {
+        if (this.attached === false) {
+            return
+        }    
         this.model.getLayout().then(layout => {
             let html = `
                 <div class='list-object'>
