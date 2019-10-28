@@ -18,21 +18,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/createApp/:name', (req, res) => {		
-	const session = enigma.create({
-		schema,
-		url: `ws://localhost:19076/engineData`,
-		mixins: enigmaMixin,
-		createSocket(url) {
-			return new ws(url);
-		}
-	})
-	session.open().then(global => {			
-		const hConfig = new halyard()
-        hConfig.addTable('/data/ramen-ratings.csv', 'Ratings') 
-		global.createAppUsingHalyard(req.params.name, hConfig).then(result => {			
-			res.send('ok')			
-		}, err => console.log(err))
-	})	
+	
 })
 
 app.get('/*', (req, res) => {
